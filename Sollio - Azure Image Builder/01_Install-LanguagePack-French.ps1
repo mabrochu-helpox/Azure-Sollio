@@ -2,7 +2,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-Write-Host -ForegroundColor Green "[HelpOX] D�but de la configuration node Prod-WVD en cours ..."
+Write-Host -ForegroundColor Green "[HelpOX] Début de la configuration node Prod-WVD en cours ..."
 Set-ExecutionPolicy Unrestricted -Force
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
@@ -64,5 +64,5 @@ if ($CurentLanguage -ne "fr-CA" )
 }
 else 
 {
-    Write-Host -ForegroundColor Green "[HelpOX] Le pack de langue francais est d�ja install� sur le serveur !"
+    Write-Host -ForegroundColor Green "[HelpOX] Le pack de langue francais est déja installé sur le serveur !"
 }
