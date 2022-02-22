@@ -1,6 +1,6 @@
 <#
 .Synopsis
-   Script d'installation de Office 365 Francais
+   Script d'installation de netFramework 
 .DESCRIPTION
     Installation de NetFrameWork
 .CREATOR
@@ -16,7 +16,7 @@
 ########################################################
 
 Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy Unrestricted -Force
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
@@ -32,7 +32,7 @@ if (!(Test-Path $path)) {
   
     try{
         Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 in progress..."
-        DISM /Online /Enable-Feature /FeatureName:NetFx3 /All 
+        DISM /Online /Enable-Feature /FeaureName:NetFx3 /All 
   }
     catch {
             Write-Error $_

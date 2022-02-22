@@ -1,8 +1,21 @@
+<#
+.Synopsis
+   Script d'installation de Fidelio
+.DESCRIPTION
+    Installation de NetFrameWork
+.CREATOR
+    Marc-André Brochu | HelpOX | mabrochu@helpox.com | 514-666-4357 Ext:3511
+.DATE
+    20 Fevrier 2022
+.VERSION
+    1.0.1 Premier Commit du script
+#>
+
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-Write-Host -ForegroundColor Green "[HelpOX] D�but de la configuration node Prod-WVD en cours ..."
+Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
 Set-ExecutionPolicy Unrestricted -Force
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
@@ -16,11 +29,14 @@ $logpath = "C:\HelpOX\GoldenImage\Log"
 if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
 {
     try {
-        Write-Host -ForegroundColor yellow "[HelpOX] Installation de Commsoft Fidelio ..."
-        msiexec /quiet /passive /qn /i "\\NETAPP-B377.ERPCOOP-SOLLIO.NET\Sollio\GoldenIMG\Softwares\FidelioSetup.msi"
+        Write-Host -ForegroundColor yellow "[HelpOX] Installing Commsoft Fidelio..."
+        New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/FidelioSetup.msi' -OutFile 'C:\temp\FidelioSetup.msi'
+        msiexec /quiet /passive /qn /i "C:\temp\FidelioSetup.msi"
         Start-sleep -Seconds 60
         Remove-Item "C:\Program Files (x86)\Commsoft Technologies Inc" -Force -Recurse -Confirm:$false
         Remove-Item C:\Users\Public\Desktop\* -Force -Confirm:$false
+        Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
     }
 
     catch {
@@ -30,5 +46,5 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
 }
 else 
 {
-    Write-Host -ForegroundColor Green "[HelpOX] Commsoft Fidelio est d�ja install� sur le serveur !"
+    Write-Host -ForegroundColor Green "[HelpOX] Commsoft Fidelio is already installed on the server!"
 }
