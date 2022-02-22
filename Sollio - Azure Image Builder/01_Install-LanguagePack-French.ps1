@@ -2,9 +2,9 @@
 .Synopsis
    Script de changement de langue Francais pour template AVD AIB
 .DESCRIPTION
-   Le script télécharger un zip avec les pack de langue Francais d'un blob storage Azure
+   Le script download un zip avec les pack de langue Francais d'un blob storage Azure
 .CREATOR
-    Marc-André Brochu | HelpOX | mabrochu@helpox.com | 514-666-4357 Ext:3511
+    Marc-Andre Brochu | HelpOX | mabrochu@helpox.com | 514-666-4357 Ext:3511
 .DATE
     20 Fevrier 2022
 .VERSION
@@ -77,16 +77,6 @@ if ($CurentLanguage -ne "fr-CA" )
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-Printing-WFS-FoD-Package~31bf3856ad364e35~amd64~fr-ca~.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-StepsRecorder-Package~31bf3856ad364e35~amd64~fr-ca~.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-WordPad-FoD-Package~31bf3856ad364e35~amd64~fr-ca~.cab
-        $LanguageList = Get-WinUserLanguageList
-        $LanguageList.Add("fr-ca")
-        Set-WinUserLanguageList $LanguageList -force
-
-        Set-WinSystemLocale fr-CA
-        Set-WinUserLanguageList -LanguageList fr-CA -Force
-        Set-WinUILanguageOverride -Language fr-CA 
-        Set-Culture -CultureInfo fr-CA
-        Set-WinHomeLocation -GeoId 39
-        Set-TimeZone "US Eastern Standard Time"
 
     }
 
@@ -98,4 +88,21 @@ if ($CurentLanguage -ne "fr-CA" )
 else 
 {
     Write-Host -ForegroundColor Green "[HelpOX] Le pack de langue francais est dÃ©ja installÃ© sur le serveur !"
+}
+
+try {
+    $LanguageList = Get-WinUserLanguageList
+    $LanguageList.Add("fr-ca")
+    Set-WinUserLanguageList $LanguageList -force
+
+    Set-WinSystemLocale fr-CA
+    Set-WinUserLanguageList -LanguageList fr-CA -Force
+    Set-WinUILanguageOverride -Language fr-CA 
+    Set-Culture -CultureInfo fr-CA
+    Set-WinHomeLocation -GeoId 39
+    Set-TimeZone "US Eastern Standard Time"
+}
+
+catch {
+        Write-Error $_
 }
