@@ -16,7 +16,7 @@
 ########################################################
 
 Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy Unrestricted -Force
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\LanguagePack" -ItemType directory -force
