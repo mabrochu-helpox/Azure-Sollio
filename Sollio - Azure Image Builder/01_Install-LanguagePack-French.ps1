@@ -2,7 +2,7 @@
 .Synopsis
    Script de changement de langue Francais pour template AVD AIB
 .DESCRIPTION
-   Le script télécharger un zip avec les pack de langue Francais d'un blob storage Azure.
+   Le script télécharger un zip avec les pack de langue Francais d'un blob storage Azure
 .CREATOR
     Marc-André Brochu | HelpOX | mabrochu@helpox.com | 514-666-4357 Ext:3511
 .DATE
