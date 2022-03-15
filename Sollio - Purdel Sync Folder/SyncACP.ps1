@@ -4,14 +4,14 @@
 .DESCRIPTION
    Envoie d'un email avec attachtment pour execution d'un flow PowerAutomate
 .NOTES
-   Le scipt s'execute avec une tache planifié sur le serveur sceduleur01
+   Le scipt s'execute avec une tache planifiÃ© sur le serveur sceduleur01
 .EXAMPLE
     .\SyncACP.ps1 -ACP_Folder PPARV (Sync le dossier PPARV)
 .AUTHOR
-   Marc-André Brochu / HelpOX / 514-666-4357 Ext:3511 / mabrochu@helpox.com
+   Marc-AndrÃ© Brochu / HelpOX / 514-666-4357 Ext:3511 / mabrochu@helpox.com
 .VERSION
    1.0.0 - 12 Mars 2022: 
-    - Version inital du script fonctionalités de bases
+    - Version inital du script fonctionalitÃ©s de bases
    1.1.0 - 14 Mars 2022: 
     - Ajout de parameter dans le script $ACP_Folder
     - Ajout d'une fonction de login dans fichier texte
@@ -31,7 +31,7 @@ $ACP_Log_File = "\\NETAPP-B377.ERPCOOP-SOLLIO.NET\Sollio\Commsoft\Rapports\Coop\
 $User = ""
 $EmailTo = "nicecube@hotmail.com"
 $EmailFrom = "purdelrepports@erpcoop-sollio.net"
-$SMTPServer = “erpcoopsollio-net01i.mail.protection.outlook.com"
+$SMTPServer = â€œerpcoopsollio-net01i.mail.protection.outlook.com"
 
 
 ###### Script Dont Edit above this line ######
@@ -41,8 +41,8 @@ $date = Get-Date -Format "dd/MM/yyyy HH:mm"
 
 if (-not(Test-Path -Path $ACP_Log_File  -PathType Leaf)) {
     
-    Write-Host "Le fichier de log est indisponible. Création du fichier de log"
-    New-Item -path $ACP_Log_File -ItemType File
+    Write-Host "Le fichier de log est indisponible. CrÃ©ation du fichier de log"
+    New-Item -path $ACP_Log_File -ItemType File | Out-Null
     Add-Content -Path $ACP_Log_File "========================== Log de synchronisation fichiers ACP $ACP_Folder =========================="
 
 }
@@ -59,7 +59,7 @@ foreach ($File in $NewFiles) {
     try {
 
         Move-Item -Path "$ACP_Path\$File" -Destination "$ACP_Path\Proceded\$File" -Force -ErrorAction SilentlyContinue
-        Add-Content -Path $ACP_Log_File "$date : Déplacement du fichier $File dans le dossier Proceded"
+        Add-Content -Path $ACP_Log_File "$date : DÃ©placement du fichier $File dans le dossier Proceded"
 
     }
     catch {
@@ -92,13 +92,13 @@ foreach ($File in $NewFiles) {
         Write-Host "Envoie du email $File en cours ... 1"
         sleep 1
 
-        Write-Host -ForegroundColor Green "Le Email contenant le fichié $File a été envoyé avec succes ! "
-        Add-Content -Path $ACP_Log_File "$date : Email contenant le fichier $File a bien été envoyé au email $EmailTo"
+        Write-Host -ForegroundColor Green "Le Email contenant le fichiÃ© $File a Ã©tÃ© envoyÃ© avec succes ! "
+        Add-Content -Path $ACP_Log_File "$date : Email contenant le fichier $File a bien Ã©tÃ© envoyÃ© au email $EmailTo"
     }
 
     catch {
 
-        Add-Content -Path $ACP_Log_File "$date : L'envoie du email contenant le fichier $File a échoué ..."
+        Add-Content -Path $ACP_Log_File "$date : L'envoie du email contenant le fichier $File a Ã©chouÃ© ..."
 
     }
 
