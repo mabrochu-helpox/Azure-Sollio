@@ -2,7 +2,7 @@
 .Synopsis
    Script d'installation de DataBaseEngine
 .DESCRIPTION
-    Installation de NetFrameWork
+    Installation de DataBaseEngine
 .CREATOR
     Marc-André Brochu | HelpOX | mabrochu@helpox.com | 514-666-4357 Ext:3511
 .DATE
