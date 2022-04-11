@@ -32,7 +32,7 @@ if (!(Test-Path $path)) {
   
     try{
         Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 in progress..."
-        DISM /Online /Enable-Feature /FeaureName:NetFx3 /All 
+        DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
   }
     catch {
             Write-Error $_
