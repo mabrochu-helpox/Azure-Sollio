@@ -33,5 +33,5 @@ if (!(Test-Path $path)) {
 }
 else 
 {
-    Write-Host -ForegroundColor Green "[HelpOX] Foxit Reader Writer is already installed on the server!"
+    Write-Host -ForegroundColor Green "[HelpOX] Foxit Reader is already installed on the server!"
 }
