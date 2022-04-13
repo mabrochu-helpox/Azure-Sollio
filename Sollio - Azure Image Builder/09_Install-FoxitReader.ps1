@@ -1,16 +1,4 @@
 ########################################################
-## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
-########################################################
-
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy Unrestricted -Force
-
-New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
-$logpath = "C:\HelpOX\GoldenImage\Log"
-
-
-########################################################
 ## Install CutePDF Writer                             ##
 ########################################################
 
@@ -30,8 +18,16 @@ $logpath = "C:\HelpOX\GoldenImage\Log"
     - Version inital du script fonctionalités de bases
 #>
 
-$SrvName = $env:COMPUTERNAME
-$Log_File = "C:\HelpOX\AIB_$SrvName.txt"
+########################################################
+## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
+########################################################
+
+Set-ExecutionPolicy Unrestricted -Force
+
+New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
+New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
+$logpath = "C:\HelpOX\GoldenImage\Log"
+$Log_File = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 
 
