@@ -60,6 +60,9 @@ Remove-Item -Path "$Destination\$ZipFile" -Force
 ## Add Languages to running Windows Image for Capture##
 ########################################################
 
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Installation des cab files en cours ..."
+
 $CurentLanguage = get-WinUserLanguageList | foreach {$_.LanguageTag}
 
 if ($CurentLanguage -ne "fr-CA" )
@@ -100,7 +103,14 @@ else
     Write-Host -ForegroundColor Green "[HelpOX] Le pack de langue francais est déja installé sur le serveur !"
 }
 
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Installation des cab files Complete"
+
 try {
+
+    $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+    Add-Content -Path $LogFile "[$now] Configuration du language FR CA par Default en cours ..."
+
     $LanguageList = Get-WinUserLanguageList
     $LanguageList.Add("fr-ca")
     Set-WinUserLanguageList $LanguageList -force
@@ -111,6 +121,10 @@ try {
     Set-Culture -CultureInfo fr-CA
     Set-WinHomeLocation -GeoId 39
     Set-TimeZone "US Eastern Standard Time"
+
+    $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+    Add-Content -Path $LogFile "[$now] Configuration du language FR CA par Default Complete"
+    Add-Content -Path $LogFile "========================== Installation du Pack De Langue FR-CA 21H2 =========================="
 }
 
 catch {
