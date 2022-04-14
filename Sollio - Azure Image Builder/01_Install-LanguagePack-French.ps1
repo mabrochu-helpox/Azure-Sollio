@@ -147,6 +147,8 @@ try {
     Set-Culture -CultureInfo fr-CA
     Set-WinHomeLocation -GeoId 39
     Set-TimeZone "US Eastern Standard Time"
+    
+    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\MUI\Settings" /v "PreferredUILanguages" /t REG_MULTI_SZ /d "fr-CA" /f
 
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Configuration du language FR CA par Default Complete"
