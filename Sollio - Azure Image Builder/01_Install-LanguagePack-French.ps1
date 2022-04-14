@@ -9,40 +9,51 @@
     20 Fevrier 2022
 .VERSION
     1.0.1 Premier Commit du script
+    1.0.2 Ajout de log file
 #>
 
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-$Date = Get-Date -UFormat "%m/%d/%Y %R"
 Set-TimeZone "US Eastern Standard Time"
-
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\LanguagePack" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 $LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
-Add-Content $LogFile "============== HelpOX Azure Image Builder Script Log =============="
+
+if (!(Test-Path $LogFile)) {
+
+    New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
+
+}
 
 
 ########################################################
 ## Download and Unzip French Language Pack From BLOB  ##
 ########################################################
 
-$Url = 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/WVD-FR-CA.zip' 
-$ZipFile = 'C:\HelpOX\GoldenImage\LanguagePack\' + $(Split-Path -Path $Url -Leaf) 
-$Destination= 'C:\HelpOX\GoldenImage\LanguagePack\' 
- 
-Invoke-WebRequest -Uri $Url -OutFile $ZipFile 
- 
-$ExtractShell = New-Object -ComObject Shell.Application 
-$Files = $ExtractShell.Namespace($ZipFile).Items() 
-$ExtractShell.NameSpace($Destination).CopyHere($Files) 
-Start-Process $Destination
+Add-Content -Path $LogFile "========================== Installation du Pack De Langue FR-CA 21H2 =========================="
 
-Remove-Item -Path 'C:\HelpOX\GoldenImage\LanguagePack\WVD-FR-CA.zip' -Force
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Telechargement du pack de langue en cours ..."
+$Url = "https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/21H2-fr-ca.zip"
+$ZipFile = "21H2-fr-ca.zip"
+$Destination = 'C:\HelpOX\GoldenImage\LanguagePack\' 
+ 
+Invoke-WebRequest -Uri $Url -OutFile $Destination\$ZipFile
+
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Telechargement du pack de langue complete"
+
+Add-Content -Path $LogFile "[$now] Extraction du pack de langue en cours ..."
+
+Expand-Archive -LiteralPath "$Destination\$ZipFile" -DestinationPath $Destination
+
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Extraction du pack de langue complete"
+
+Remove-Item -Path "$Destination\$ZipFile" -Force
 
 
 ########################################################
@@ -54,21 +65,17 @@ $CurentLanguage = get-WinUserLanguageList | foreach {$_.LanguageTag}
 if ($CurentLanguage -ne "fr-CA" )
 {
     try {
-        
-        Write-Host -ForegroundColor yellow "[HelpOX] Installation of the French language pack in progress..."
-
         ##Disable Language Pack Cleanup##
         Disable-ScheduledTask -TaskPath "\Microsoft\Windows\AppxDeploymentClient\" -TaskName "Pre-staged app cleanup"
 
         ##Set Language Pack Content Stores##
-        [string]$LIPContent = "C:\HelpOX\GoldenImage\LanguagePack"
-
+        [string]$LIPContent = "C:\HelpOX\GoldenImage\LanguagePack\21H2-fr-ca"
 
         ##French##
         Add-AppProvisionedPackage -Online -PackagePath $LIPContent\fr-ca\LanguageExperiencePack.fr-CA.Neutral.appx -LicensePath $LIPContent\fr-ca\License.xml
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-Client-Language-Pack_x64_fr-ca.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-Basic-fr-ca-Package~31bf3856ad364e35~amd64~~.cab
-        Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-Handwriting-fr-fr-Package~31bf3856ad364e35~amd64~~.cab
+        #Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-Handwriting-fr-fr-Package~31bf3856ad364e35~amd64~~.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-OCR-fr-ca-Package~31bf3856ad364e35~amd64~~.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-Speech-fr-ca-Package~31bf3856ad364e35~amd64~~.cab
         Add-WindowsPackage -Online -PackagePath $LIPContent\Microsoft-Windows-LanguageFeatures-TextToSpeech-fr-ca-Package~31bf3856ad364e35~amd64~~.cab
