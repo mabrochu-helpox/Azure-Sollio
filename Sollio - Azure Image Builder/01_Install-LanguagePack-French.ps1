@@ -11,6 +11,7 @@
     1.0.1 Premier Commit du script
     1.0.2 Ajout de log file
 #>
+write-host "01_Install-LanguagePack-French.ps1"
 
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
