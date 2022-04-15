@@ -164,4 +164,4 @@ catch {
         Write-Error $_
 }
 
- Write-Host "Exit code: " $LASTEXITCODE
+ #Write-Host "Exit code: " $LASTEXITCODE
