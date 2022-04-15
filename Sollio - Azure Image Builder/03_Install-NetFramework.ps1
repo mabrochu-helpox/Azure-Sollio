@@ -14,9 +14,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+write-host "03_Install-NetFramework.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
