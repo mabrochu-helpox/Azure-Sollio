@@ -58,6 +58,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "Office 16 Click-to-
     try {
          Write-Host -ForegroundColor yellow "[HelpOX] Installation de Office 365 en Cours ..."
          C:\HelpOX\GoldenImage\Office365\setup.exe /configure C:\HelpOX\GoldenImage\Office365\Configuration.xml
+         Get-Process -Name "setup" -ErrorAction SilentlyContinue | Wait-Process
         
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Office 365 completer"
@@ -73,3 +74,4 @@ else
 {
     Write-Host -ForegroundColor Green "[HelpOX] Office 365 is already installed on the server!"
 }
+
