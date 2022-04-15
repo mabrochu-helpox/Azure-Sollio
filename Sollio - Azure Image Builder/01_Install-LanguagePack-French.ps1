@@ -11,14 +11,14 @@
     1.0.1 Premier Commit du script
     1.0.2 Ajout de log file
 #>
-write-host "01_Install-LanguagePack-French.ps1"
 
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-Set-TimeZone "US Eastern Standard Time"
-#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
+write-host "01_Install-LanguagePack-French.ps1"
+
+Set-TimeZone "US Eastern Standard Time"
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\LanguagePack" -ItemType directory -force
 $LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
