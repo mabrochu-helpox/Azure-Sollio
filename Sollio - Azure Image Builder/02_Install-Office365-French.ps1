@@ -14,8 +14,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
+write-host "02_Install-Office365-French.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\Office365" -ItemType Directory -force
