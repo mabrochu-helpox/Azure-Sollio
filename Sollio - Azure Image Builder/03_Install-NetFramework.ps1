@@ -19,20 +19,35 @@ Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configura
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
+$LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
+
+if (!(Test-Path $LogFile)) {
+    write-host 'Creation du fichier de log'
+    New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
+
+}
 
 ########################################################
 ## Install NetFramework 3.5                           ##
 ########################################################
+
+Add-Content -Path $LogFile "========================== Installation De NetFrameWork 3.5 =========================="
 
 $path = "C:\Windows\Microsoft.NET\Framework64\v3.5"
 
 if (!(Test-Path $path)) {
   
     try{
-        Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 in progress..."
-        DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
+         Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 en cours ..."
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Installation De NetFrameWork 3.5 en cours ..."
+        
+         DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
+        
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Installation De NetFrameWork 3.5 completer"
+         Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 completer"
   }
     catch {
             Write-Error $_
