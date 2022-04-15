@@ -14,8 +14,8 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
+write-host "04_Install-MMC-Snap-In.ps1"
 
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
