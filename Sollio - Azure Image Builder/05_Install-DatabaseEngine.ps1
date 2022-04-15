@@ -19,9 +19,14 @@ Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configura
 Set-ExecutionPolicy Unrestricted -Force
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
+$LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
 
+if (!(Test-Path $LogFile)) {
+    write-host 'Creation du fichier de log'
+    New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
+
+}
 ########################################################
 ## Register AccessDatabaseEngine                      ##
 ########################################################
@@ -29,13 +34,23 @@ $logpath = "C:\HelpOX\GoldenImage\Log"
 if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Microsoft Access database engine 2010*"}))
 {
     try {
-        Write-Host -ForegroundColor yellow "[HelpOX] Installation de Microsoft Access database engine 2010 ..."
-        New-Item -Path "c:\" -Name "temp" -ItemType "directory"
-        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/AccessDatabaseEngine.exe' -OutFile 'C:\temp\AccessDatabaseEngine.exe'
-        C:\temp\AccessDatabaseEngine.exe /quiet
-        sleep 60
-        Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
-    }
+         Add-Content -Path $LogFile "========================== Installation DATABASE ENGINE =========================="
+
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Telechargement Database Engine en cours ..."
+         Write-Host -ForegroundColor yellow "[HelpOX] Installation de Microsoft Access database engine 2010 ..."
+         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+         Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/AccessDatabaseEngine.exe' -OutFile 'C:\temp\AccessDatabaseEngine.exe'
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Telechargement Database Engine Completer"
+         Add-Content -Path $LogFile "[$now] Installation de Database Engine en cours ..."
+         C:\temp\AccessDatabaseEngine.exe /quiet
+         sleep 90
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Installation de Database Engine Completer"
+         Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
+         Add-Content -Path $LogFile "========================== Installation DATABASE ENGINE =========================="
+         }
 
     catch {
            Write-Error $_
