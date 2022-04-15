@@ -163,3 +163,5 @@ try {
 catch {
         Write-Error $_
 }
+
+ Write-Host "Exit code: " $LASTEXITCODE
