@@ -16,8 +16,6 @@
 ########################################################
 write-host "04_Install-MMC-Snap-In.ps1"
 
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
-
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
 $LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
