@@ -2,8 +2,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy Unrestricted -Force
+Write-Host "08_Install-CutePDF.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
