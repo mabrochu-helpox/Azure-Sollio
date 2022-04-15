@@ -2,8 +2,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configuration in progress..."
-Set-ExecutionPolicy Unrestricted -Force
+write-host "07_Install-GhostScript.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
