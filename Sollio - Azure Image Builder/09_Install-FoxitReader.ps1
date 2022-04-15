@@ -25,7 +25,6 @@
 write-host "09_Install-FoxitReader.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
 $Log_File = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
