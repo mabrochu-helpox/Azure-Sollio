@@ -57,7 +57,6 @@ if (!(Test-Path $path)) {
 
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $Log_File "[$now] Foxit reader installed successfully"
-        Add-Content -Path $Log_File "========================== Installation de Foxit Reader =========================="
   }
     catch {
             Write-Error $_
