@@ -22,7 +22,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-Set-ExecutionPolicy Unrestricted -Force
+write-host "09_Install-FoxitReader.ps1"
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
