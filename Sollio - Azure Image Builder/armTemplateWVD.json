@@ -1,0 +1,171 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+    },
+
+
+    "resources": [
+      {
+        "name": "SollioTemplate003",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "apiVersion": "2020-02-14",
+        "location": "eastus2",
+        "dependsOn": [],
+        "tags": {
+            "imagebuilderTemplate": "AzureImageBuilderSIG",
+            "userIdentity": "enabled"
+                },
+            "identity": {
+                "type": "UserAssigned",
+                        "userAssignedIdentities": {
+                        "/subscriptions/03416f69-f4a4-4dc5-ad36-f399cb3dcc1b/resourcegroups/RG-AZUREIMAGEBUILDER/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MI-AIB": {}
+                            
+                    }
+                    },
+        
+        "properties": {
+            "buildTimeoutInMinutes" : 120,
+
+            "vmProfile": 
+                    {
+                    "vmSize": "Standard_D2_v2",
+                    "osDiskSizeGB": 127
+                    },
+        
+            "source": {
+                "type": "PlatformImage",
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "windows-10",
+                    "sku": "21h1-evd",
+                    "version": "latest"
+            },
+            "customize": [
+                    {
+                        "type": "PowerShell",
+                        "name": "01 Install Language Pack",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/01_Install-LanguagePack-French.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'restarting apres pack de langue'",
+                        "restartTimeout": "5m"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "OptimizeOS",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/solutions/14_Building_Images_WVD/1_Optimize_OS_for_WVD.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'restarting post Optimizations'",
+                        "restartTimeout": "5m"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "02 Install Office 365",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/02_Install-Office365-French.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "03 Install NetFrameWork 3.5",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/03_Install-NetFramework.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "04 Install MMC SnapShot",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/04_Install-MMC-Snap-In.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "05 Install Database Engine",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/05_Install-DatabaseEngine.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "06 Install Fidelio",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/06_Install-Fidelio.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "07 Install GhostScript",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/07_Install-GhostScript.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "08 Install CutePDF",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/08_Install-CutePDF.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "09 Install Foxit Reader",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/mabrochu-helpox/Azure-Sollio/main/Sollio%20-%20Azure%20Image%20Builder/09_Install-FoxitReader.ps1"
+                    },
+                    {
+                        "type": "WindowsUpdate",
+                        "searchCriteria": "IsInstalled=0",
+                        "filters": [
+                            "exclude:$_.Title -like '*Preview*'",
+                            "include:$true"
+                                    ],
+                        "updateLimit": 40
+                    },
+                    {
+                        "type": "PowerShell",
+                        "runElevated": true,
+                        "name": "DeprovisioningScript",
+                        "inline": [
+                        "((Get-Content -path C:\\DeprovisioningScript.ps1 -Raw) -replace 'Sysprep.exe /oobe /generalize /quiet /quit','Sysprep.exe /oobe /generalize /quit /mode:vm' ) | Set-Content -Path C:\\DeprovisioningScript.ps1"
+                        ]
+                    }
+
+            ],
+            "distribute": 
+            [
+                {   
+                    "type": "SharedImage",
+                    "galleryImageId": "/subscriptions/03416f69-f4a4-4dc5-ad36-f399cb3dcc1b/resourceGroups/RG-AZUREIMAGEBUILDER/providers/Microsoft.Compute/galleries/SollioComputeGallery/images/win10avd",
+                    "runOutputName": "sigOutput",
+                    "artifactTags": {
+                        "source": "wvd10",
+                        "baseosimg": "windows10"
+                    },
+                    "replicationRegions": [
+                      "eastus2"
+
+                    ]
+                }
+            ]
+            }
+        }
+
+    
+    ]
+}    
+
+
+
+
+
+
+
