@@ -23,7 +23,7 @@ New-Item -Path "C:\HelpOX\GoldenImage\LanguagePack" -ItemType directory -force
 $LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
 
 if (!(Test-Path $LogFile)) {
-
+    write-host 'Creation du fichier de log'
     New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 
 }
@@ -42,6 +42,7 @@ $ZipFile = "21H2-fr-ca.zip"
 $Destination = 'C:\HelpOX\GoldenImage\LanguagePack\' 
  
 Invoke-WebRequest -Uri $Url -OutFile $Destination\$ZipFile
+write-host 'Telechargement du pack de langue FR-CA terminer'
 
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Telechargement du pack de langue complete"
@@ -49,12 +50,13 @@ Add-Content -Path $LogFile "[$now] Telechargement du pack de langue complete"
 Add-Content -Path $LogFile "[$now] Extraction du pack de langue en cours ..."
 
 Expand-Archive -LiteralPath "$Destination\$ZipFile" -DestinationPath $Destination
+write-host 'Extraction du pack de langue FR-CA terminer'
 
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Extraction du pack de langue complete"
 
 Remove-Item -Path "$Destination\$ZipFile" -Force
-
+write-host 'Supression Archive pack de langue FR-CA terminer'
 
 ########################################################
 ## Add Languages to running Windows Image for Capture##
@@ -62,6 +64,7 @@ Remove-Item -Path "$Destination\$ZipFile" -Force
 
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Installation des cab files en cours ..."
+write-host 'Installation du pack de langue FR-CA en cours ...'
 
 $CurentLanguage = get-WinUserLanguageList | foreach {$_.LanguageTag}
 
@@ -129,6 +132,7 @@ else
     Write-Host -ForegroundColor Green "[HelpOX] Le pack de langue francais est déja installé sur le serveur !"
 }
 
+write-host 'Installation du pack de langue FR-CA terminer'
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Installation des cab files Complete"
 
@@ -152,6 +156,7 @@ try {
 
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Configuration du language FR CA par Default Complete"
+    write-host 'Le pack de langue FR-CA est maintenant la langue par default'
     Add-Content -Path $LogFile "========================== Installation du Pack De Langue FR-CA 21H2 =========================="
 }
 
