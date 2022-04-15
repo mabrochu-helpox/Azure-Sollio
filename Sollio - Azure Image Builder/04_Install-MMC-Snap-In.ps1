@@ -19,8 +19,14 @@ Write-Host -ForegroundColor Green "[HelpOX] Beginning of Prod-WVD node configura
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
-New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
 $logpath = "C:\HelpOX\GoldenImage\Log"
+$LogFile = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
+
+if (!(Test-Path $LogFile)) {
+    write-host 'Creation du fichier de log'
+    New-Item -Path "C:\HelpOX\GoldenImage\Log\$env:computername.txt" -ItemType file -force
+
+}
 
 ########################################################
 ## Install MMC for Active Directory User Accec        ##
@@ -31,12 +37,19 @@ $path = "C:\Windows\System32\dsa.msc"
 if (!(Test-Path $path)) {
   
     try{
-        Write-Host -ForegroundColor yellow "[HelpOX] Installing the Active Directory MMC console in progress..."
-        New-Item -Path "c:\" -Name "temp" -ItemType "directory"
-        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/WindowsTH-RSAT_WS_1803-x64.msu' -OutFile 'C:\temp\WindowsTH-RSAT_WS_1803-x64.msu'
-        C:\temp\WindowsTH-RSAT_WS_1803-x64.msu /quiet /passive /norestart
-        sleep 60
-        Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
+         Add-Content -Path $LogFile "========================== Installation des Modules Active Directory =========================="
+         Write-Host -ForegroundColor yellow "[HelpOX] Installing the Active Directory MMC console in progress..."
+         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+         Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/WindowsTH-RSAT_WS_1803-x64.msu' -OutFile 'C:\temp\WindowsTH-RSAT_WS_1803-x64.msu'
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Telechargement module MMC AD completer"
+         Add-Content -Path $LogFile "[$now] Installation module MMC AD en cours ..."
+         
+         C:\temp\WindowsTH-RSAT_WS_1803-x64.msu /quiet /passive /norestart
+         sleep 90
+         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+         Add-Content -Path $LogFile "[$now] Instalation module MMC AD completer"        
+         Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
   }
     catch {
             Write-Error $_
