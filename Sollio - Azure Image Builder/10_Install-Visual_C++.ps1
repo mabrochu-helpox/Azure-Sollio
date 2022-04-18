@@ -49,6 +49,7 @@ try{
     C:\temp\VC_redist.x64.exe /Q /norestart
     Start-sleep -Seconds 90
     C:\temp\VC_redist.x86.exe /Q /norestart
+    Start-sleep -Seconds 90
 
     Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
 
