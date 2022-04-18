@@ -40,7 +40,6 @@ if (!(Test-Path $path)) {
         Add-Content -Path $LogFile "[$now] Installation de GhostScript terminer"        
         Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
         Add-Content -Path $LogFile "[$now] Nettoyage des sources de GhostScript terminer" 
-        Add-Content -Path $LogFile "========================== Installation De GhostScript =========================="
   }
     catch {
             Write-Error $_
