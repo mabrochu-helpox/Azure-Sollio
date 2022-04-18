@@ -48,7 +48,6 @@ if (!(Test-Path $path)) {
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Instalation module MMC AD completer"        
          Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
-         Add-Content -Path $LogFile "========================== Installation des Modules Active Directory =========================="
   }
     catch {
             Write-Error $_
