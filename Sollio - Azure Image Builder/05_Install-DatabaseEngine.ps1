@@ -47,7 +47,6 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Microsoft Access d
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Database Engine Completer"
          Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
-         Add-Content -Path $LogFile "========================== Installation DATABASE ENGINE =========================="
          }
 
     catch {
