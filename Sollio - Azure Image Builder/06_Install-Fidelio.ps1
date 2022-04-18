@@ -58,7 +58,6 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
          
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Nettoyage des sources de Fidelio terminer" 
-         Add-Content -Path $LogFile "========================== Installation de Commsoft Fidelio =========================="
     }
 
     catch {
