@@ -61,7 +61,6 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "Office 16 Click-to-
         
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Office 365 completer"
-         Add-Content -Path $LogFile "========================== Installation de Office 365 Francais =========================="
     }
 
     catch {
