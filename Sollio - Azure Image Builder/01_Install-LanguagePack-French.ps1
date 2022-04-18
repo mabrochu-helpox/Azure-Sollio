@@ -158,7 +158,6 @@ try {
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Configuration du language FR CA par Default Complete"
     write-host 'Le pack de langue FR-CA est maintenant la langue par default'
-    Add-Content -Path $LogFile "========================== Installation du Pack De Langue FR-CA 21H2 =========================="
 }
 
 catch {
