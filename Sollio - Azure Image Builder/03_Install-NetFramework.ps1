@@ -46,7 +46,6 @@ if (!(Test-Path $path)) {
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation De NetFrameWork 3.5 completer"
          Write-Host -ForegroundColor yellow "[HelpOX] Installing NetFramework 3.5 completer"
-         Add-Content -Path $LogFile "========================== Installation De NetFrameWork 3.5 =========================="
 
   }
     catch {
