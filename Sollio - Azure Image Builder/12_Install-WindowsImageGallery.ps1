@@ -1,1 +1,0 @@
-12_Install-WindowsImageGallery.ps1
