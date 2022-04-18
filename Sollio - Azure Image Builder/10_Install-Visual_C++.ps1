@@ -41,7 +41,7 @@ try{
     Add-Content -Path $Log_File "========================== Installation de Visual C++ 2015-2019 =========================="
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $Log_File "[$now] Installing de Visual C++ 2015-2019 en cours ..."
-    New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+    New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force -ErrorAction SilentlyContinue
 
     Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/VC_redist.x64.exe' -OutFile 'C:\temp\VC_redist.x64.exe'
     Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/VC_redist.x86.exe' -OutFile 'C:\temp\VC_redist.x86.exe'
@@ -58,4 +58,3 @@ try{
 catch {
         Write-Error $_
 }  
-
