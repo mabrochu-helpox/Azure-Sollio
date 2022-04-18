@@ -46,9 +46,9 @@ try{
     Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/VC_redist.x64.exe' -OutFile 'C:\temp\VC_redist.x64.exe'
     Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/VC_redist.x86.exe' -OutFile 'C:\temp\VC_redist.x86.exe'
 
-    C:\temp\VC_redist.x64.exe /Q
+    C:\temp\VC_redist.x64.exe /Q /norestart
     Start-sleep -Seconds 90
-    C:\temp\VC_redist.x86.exe /Q
+    C:\temp\VC_redist.x86.exe /Q /norestart
 
     Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
 
