@@ -22,7 +22,7 @@
 
 write-host "09_Install-AdobeReader.ps1"
 
-New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force
+New-Item -Path "C:\HelpOX\GoldenImage\Log" -ItemType directory -force -ErrorAction SilentlyContinue
 $logpath = "C:\HelpOX\GoldenImage\Log"
 $Log_File = "C:\HelpOX\GoldenImage\Log\$env:computername.txt"
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
@@ -31,8 +31,8 @@ $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 if (-not(Test-Path -Path $Log_File  -PathType Leaf)) {
     
     Write-Host "Le fichier de log est indisponible. Création du fichier de log"
-    New-Item -path C:\HelpOX -ItemType Directory | Out-Null
-    New-Item -path $Log_File -ItemType File | Out-Null
+    New-Item -path C:\HelpOX -ItemType Directory | Out-Null -ErrorAction SilentlyContinue
+    New-Item -path $Log_File -ItemType File | Out-Null -ErrorAction SilentlyContinue
 
 }
 
