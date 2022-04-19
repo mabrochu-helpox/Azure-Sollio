@@ -1,4 +1,4 @@
-﻿########################################################
+########################################################
 ## Install Adobe Reader                               ##
 ########################################################
 
@@ -36,30 +36,20 @@ if (-not(Test-Path -Path $Log_File  -PathType Leaf)) {
 
 }
 
+ 
+try{
+    Add-Content -Path $Log_File "========================== Installation de Adobe Reader =========================="
+    $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+    Add-Content -Path $Log_File "[$now] Installing Foxit Reader in progress..."
+    New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+    Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/AcroRdrDC2200120117_fr_FR.exe' -OutFile 'C:\temp\AcroRdrDC2200120117_fr_FR.exe'
+    C:\temp\AcroRdrDC2200120117_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES
+    Start-sleep -Seconds 90
+    Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
 
-
-$path = "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
-
-if (!(Test-Path $path)) {
-  
-    try{
-        Add-Content -Path $Log_File "========================== Installation de Adobe Reader =========================="
-        $now = Get-Date -Format "MM/dd/yyyy HH:mm"
-        Add-Content -Path $Log_File "[$now] Installing Foxit Reader in progress..."
-        New-Item -Path "c:\" -Name "temp" -ItemType "directory"
-        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/AcroRdrDC2200120117_fr_FR.exe' -OutFile 'C:\temp\AcroRdrDC2200120117_fr_FR.exe'
-        C:\temp\AcroRdrDC2200120117_fr_FR.exe /sAll /rs /msi EULA_ACCEPT=YES
-        Start-sleep -Seconds 90
-        Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
-
-        $now = Get-Date -Format "MM/dd/yyyy HH:mm"
-        Add-Content -Path $Log_File "[$now] Adobe Reader installed successfully"
-  }
-    catch {
-            Write-Error $_
-    }  
+    $now = Get-Date -Format "MM/dd/yyyy HH:mm"
+    Add-Content -Path $Log_File "[$now] Adobe Reader installed successfully"
 }
-else 
-{
-    Write-Host -ForegroundColor Green "[HelpOX] Adobe Reader is already installed on the server!"
-}
+catch {
+        Write-Error $_
+}  
