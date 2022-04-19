@@ -33,7 +33,7 @@ try{
     Add-Content -Path $LogFile "[$now] Telechargement de CutePDF terminer"
     Add-Content -Path $LogFile "[$now] Installation de CutePDF en cours ..."
     C:\temp\CuteWriter.exe /VERYSILENT /NORESTART
-    Start-sleep -Seconds 90
+    Start-sleep -Seconds 180
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Installation de CutePDF terminer"
     Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
