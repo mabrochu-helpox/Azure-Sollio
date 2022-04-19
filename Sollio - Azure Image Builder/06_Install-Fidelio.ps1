@@ -46,13 +46,14 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
          Add-Content -Path $LogFile "[$now] Telechargement de Fidelio terminer" 
          Add-Content -Path $LogFile "[$now] Installation de Fidelio en cour ..." 
          
-         msiexec /quiet /passive /qn /i "C:\temp\FidelioSetup.msi"
+         msiexec /i "C:\temp\FidelioSetup.msi" TARGETDIR="C:\Fidelio" /q
+
          Start-sleep -Seconds 90
 
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Fidelio terminer" 
 
-         Remove-Item "C:\Program Files (x86)\Commsoft Technologies Inc" -Force -Recurse -Confirm:$false
+        
          Remove-Item C:\Users\Public\Desktop\* -Force -Confirm:$false
          Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
          
