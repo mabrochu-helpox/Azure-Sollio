@@ -30,11 +30,11 @@ if (!(Test-Path $path)) {
     
         Write-Host -ForegroundColor yellow "[HelpOX] Installing GhostScript..."
         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
-        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/gs9550w64.exe' -OutFile 'C:\temp\gs9550w64.exe'
+        Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/gs9550w64.exe' -OutFile 'C:\temp\gs9561w32.exe'
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $LogFile "[$now] Telechargement de GhostScript terminer"
         Add-Content -Path $LogFile "[$now] Installation de GhostScript en cours ..."
-        C:\temp\gs9550w64.exe /S
+        C:\temp\gs9561w32.exe /S
         Start-sleep -Seconds 90
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $LogFile "[$now] Installation de GhostScript terminer"        
