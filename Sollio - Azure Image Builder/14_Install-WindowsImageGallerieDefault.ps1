@@ -45,7 +45,7 @@ Add-Content -Path $LogFile "[$now] Téléchargement des Reg file depuis Azure"
 New-Item -Path "c:\" -Name "temp" -ItemType "directory"
 Invoke-WebRequest -Uri 'https://github.com/mabrochu-helpox/Azure-Sollio/raw/main/MSPhotoViewerReg/MSPhotoViewerReg.zip' -OutFile 'C:\temp\MSPhotoViewerReg.zip'
 
-Expand-Archive C:\temp\MSPhotoViewerReg.zip -DestinationPath C:\temp
+Expand-Archive C:\temp\MSPhotoViewerReg.zip -DestinationPath C:\temp -Force
 
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Importation des clefs de registres"
