@@ -43,3 +43,21 @@ Set-Service -name wsearch -startupType disabled
 
 Stop-Service -name CscService -force
 Set-Service -name CscService -startupType disabled
+
+########################################################
+##                Disable A and D Drives              ##
+########################################################
+
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Désactivation du lecteur CD"
+#Desactivatrion du lecteur CD
+Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\cdrom -Name Start -Value 4 -Type Dword
+
+$now = Get-Date -Format "MM/dd/yyyy HH:mm"
+Add-Content -Path $LogFile "[$now] Désactivation du lecteur de disquette"
+#Desactivatrion du lecteur Disquette
+Get-PnpDevice -Class FloppyDisk | Disable-PnpDevice -Confirm:$false
+
+########################################################
+##                Disable A and D Drives              ##
+########################################################
