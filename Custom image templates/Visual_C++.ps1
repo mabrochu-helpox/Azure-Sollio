@@ -19,9 +19,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-
-write-host "10_Install-Visual_C++.ps1"
-
+write-host "[ited] - Install Visual C++ en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force -ErrorAction SilentlyContinue
 $logpath = "C:\ited\GoldenImage\Log"
 $Log_File = "C:\ited\GoldenImage\Log\$env:computername.txt"
