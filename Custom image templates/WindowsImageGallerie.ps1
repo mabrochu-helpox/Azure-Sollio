@@ -18,8 +18,7 @@
 ########################################################
 ##              Variable and Logs / Others            ##
 ########################################################
-
-write-host "14_Install-WindowsImageGallerieDefault.ps1"
+write-host "[ited] - Windows Image Gallerie Default en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\ited\GoldenImage\LanguagePack" -ItemType directory -force
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
@@ -51,4 +50,4 @@ Invoke-Command {reg import "C:\temp\MS PhotoViewer.bmp.reg" *>&1 | Out-Null}
 Invoke-Command {reg import "C:\temp\MS PhotoViewer.jpe.reg" *>&1 | Out-Null}
 Invoke-Command {reg import "C:\temp\MS PhotoViewer.jpeg.reg" *>&1 | Out-Null}
 Invoke-Command {reg import "C:\temp\MS PhotoViewer.jpg.reg" *>&1 | Out-Null}
-write-host "ited - Images Gallerie Set success"
+write-host "[ited] - Images Gallerie Set success"
