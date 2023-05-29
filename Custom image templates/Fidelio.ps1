@@ -19,7 +19,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-write-host "ited - Installation de Fidelio"
+write-host "[ited] - Installation de Fidelio en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
@@ -49,7 +49,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
          #Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Nettoyage des sources de Fidelio terminer" 
-         write-host "ited - Installation de Fidelio success"
+         write-host "[ited] - Installation de Fidelio success"
     }
     catch {
            Write-Error $_
