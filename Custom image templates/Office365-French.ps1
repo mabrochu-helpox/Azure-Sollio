@@ -64,7 +64,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "Office 16 Click-to-
          Get-Process -Name "setup" -ErrorAction SilentlyContinue | Wait-Process
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Office 365 completer"
-         write-host "ited - Installation de Office 365 success"
+         write-host "[ited] - Installation de Office 365 success"
     }
 
     catch {
