@@ -44,3 +44,12 @@ Set-Service -name CscService -startupType disabled
 #Disable Cortana
 Get-AppxPackage -AllUsers Microsoft.549981C3F5F10 | Remove-AppPackage
 
+#Disable 3D viewer
+Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage
+
+#Disable Mixed Reality Portal
+Get-AppxPackage Microsoft.MixedReality.Portal | Remove-AppxPackage
+
+#Disable Paint3D
+Get-AppxPackage Microsoft.MSPaint | Remove-AppxPackage
+
