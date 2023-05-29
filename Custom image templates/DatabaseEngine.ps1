@@ -16,8 +16,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-write-host "ited - Installation de DataBaseEngine"
-
+write-host "[ited] - Installation de DataBaseEngine en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
@@ -49,7 +48,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Microsoft Access d
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Installation de Database Engine Completer"
          #Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
-         write-host "ited - Installation de Database Engine success"
+         write-host "[ited] - Installation de Database Engine success"
         }
         catch {
             Write-Error $_
