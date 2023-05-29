@@ -18,7 +18,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-write-host "03_Install-NetFramework.ps1"
+write-host "[ited] - Installation de NetFramework 3.5 en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
