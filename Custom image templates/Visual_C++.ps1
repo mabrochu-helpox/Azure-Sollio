@@ -29,8 +29,8 @@ $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 
 if (-not(Test-Path -Path $Log_File  -PathType Leaf)) {
     Write-Host "Le fichier de log est indisponible. Création du fichier de log"
-    New-Item -path C:\ited -ItemType Directory | Out-Null
-    New-Item -path $Log_File -ItemType File | Out-Null
+    New-Item -path C:\ited -ItemType Directory -force | Out-Null
+    New-Item -path $Log_File -ItemType File -force | Out-Null
 }
 try{
     Add-Content -Path $Log_File "========================== Installation de Visual C++ 2015-2019 =========================="
@@ -46,7 +46,7 @@ try{
     #Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $Log_File "[$now] Visual C++ 2015-2019 installed successfully"
-    write-host "ited - Installation de Visual C++ success"
+    write-host "[ited] - Installation de Visual C++ success"
 }
 catch {
         Write-Error $_
