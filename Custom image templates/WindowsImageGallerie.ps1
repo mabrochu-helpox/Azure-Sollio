@@ -32,7 +32,6 @@ if (!(Test-Path $LogFile)) {
 ########################################################
 ##         Set Windows Image Viewer as default        ##
 ########################################################
-
 Add-Content -Path $LogFile "========================== Set Windows Image Viewer as Default =========================="
 $now = Get-Date -Format "MM/dd/yyyy HH:mm"
 Add-Content -Path $LogFile "[$now] Set Windows Image Viewer as Default"
