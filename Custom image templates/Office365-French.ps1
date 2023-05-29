@@ -18,8 +18,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-write-host "02_Install-Office365-French.ps1"
-
+write-host "[ited] - Installation de Office 365 Francais en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 New-Item -Path "C:\ited\GoldenImage\Office365" -ItemType Directory -force
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
