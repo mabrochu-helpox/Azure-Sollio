@@ -36,7 +36,7 @@ if (!(Test-Path $path)) {
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $LogFile "[$now] Telechargement de GhostScript en cours ..."
         Write-Host -ForegroundColor yellow "[ited] Installing GhostScript..."
-        New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+        New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force
         Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/gs910w64.exe' -OutFile 'C:\temp\gs910w64.exe'
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $LogFile "[$now] Telechargement de GhostScript terminer"
