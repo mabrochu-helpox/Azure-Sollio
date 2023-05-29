@@ -40,7 +40,7 @@ if (!(Test-Path $path)) {
         $now = Get-Date -Format "MM/dd/yyyy HH:mm"
         Add-Content -Path $LogFile "[$now] Installation De NetFrameWork 3.5 completer"
         Write-Host -ForegroundColor yellow "[ited] Installing NetFramework 3.5 completer"
-        write-host "ited - Installation de NetFramework 3.5 success"
+        write-host "[ited] - Installation de NetFramework 3.5 success"
         #ajout 16 mai 2023
         Restart-Computer -force
     }
