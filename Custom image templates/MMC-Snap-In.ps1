@@ -18,7 +18,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-write-host "04_Install-MMC-Snap-In.ps1"
+write-host "[ited] - Installation de SnapShot MMC en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
