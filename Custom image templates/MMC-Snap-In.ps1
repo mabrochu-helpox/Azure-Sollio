@@ -34,7 +34,7 @@ if (!(Test-Path $path)) {
     try{
          Add-Content -Path $LogFile "========================== Installation des Modules Active Directory =========================="
          Write-Host -ForegroundColor yellow "[ited] Installing the Active Directory MMC console in progress..."
-         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+         New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force
          Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/WindowsTH-RSAT_WS_1803-x64.msu' -OutFile 'C:\temp\WindowsTH-RSAT_WS_1803-x64.msu'
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Telechargement module MMC AD completer"
