@@ -18,8 +18,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-
-write-host "ited - Installation de GhostScript"
+write-host "[ited] - Installation de GhostScript en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
@@ -47,7 +46,7 @@ if (!(Test-Path $path)) {
         Add-Content -Path $LogFile "[$now] Installation de GhostScript terminer"        
         #Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
         Add-Content -Path $LogFile "[$now] Nettoyage des sources de GhostScript terminer" 
-        write-host "ited - Installation de GhostScript success"
+        write-host "[ited] - Installation de GhostScript success"
     }
     catch {
             Write-Error $_
