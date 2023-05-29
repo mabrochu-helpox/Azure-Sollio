@@ -41,5 +41,6 @@ Set-Service -name wsearch -startupType disabled
 Stop-Service -name CscService -force
 Set-Service -name CscService -startupType disabled
 
-#net localgroup "FSLogix Profile Include List" "everyone" /delete
-#net localgroup "FSLogix ODFC Include List" "everyone" /delete
+#Disable Cortana
+Get-AppxPackage -AllUsers Microsoft.549981C3F5F10 | Remove-AppPackage
+
