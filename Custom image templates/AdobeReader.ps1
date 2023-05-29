@@ -20,7 +20,7 @@
 ########################################################
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
-
+write-host "[ited] - Installation de Adobe Reader en cours ..."
 $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 Write-Host "***Starting AVD AIB CUSTOMIZER PHASE: Install Adobe Reader -  $((Get-Date).ToUniversalTime()) "
 
