@@ -36,7 +36,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Fidelio*"}))
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Telechargement de Fidelio en cours ..."
          Write-Host -ForegroundColor yellow "[ited] Installing Commsoft Fidelio..."
-         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+         New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force
          Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/FidelioSetup.msi' -OutFile 'C:\temp\FidelioSetup.msi'
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Telechargement de Fidelio terminer" 
