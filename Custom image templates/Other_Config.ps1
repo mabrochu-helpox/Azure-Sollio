@@ -40,3 +40,6 @@ Set-Service -name wsearch -startupType disabled
 
 Stop-Service -name CscService -force
 Set-Service -name CscService -startupType disabled
+
+net localgroup "FSLogix Profile Include List" "everyone" /delete
+net localgroup "FSLogix ODFC Include List" "everyone" /delete
