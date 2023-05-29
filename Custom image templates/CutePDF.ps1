@@ -39,7 +39,7 @@ try{
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Telechargement de CutePDF en cours ..."
     Write-Host -ForegroundColor yellow "[ited] Installing CutePDF Writer in progress..."
-    New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+    New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force
     Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/CuteWriter.exe' -OutFile 'C:\temp\CuteWriter.exe'
     $now = Get-Date -Format "MM/dd/yyyy HH:mm"
     Add-Content -Path $LogFile "[$now] Telechargement de CutePDF terminer"
