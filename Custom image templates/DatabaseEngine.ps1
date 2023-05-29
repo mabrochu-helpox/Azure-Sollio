@@ -39,7 +39,7 @@ if (-not (Get-WmiObject win32_product | where{$_.Name -like "*Microsoft Access d
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Telechargement Database Engine en cours ..."
          Write-Host -ForegroundColor yellow "[ited] Installation de Microsoft Access database engine 2010 ..."
-         New-Item -Path "c:\" -Name "temp" -ItemType "directory"
+         New-Item -Path "c:\" -Name "temp" -ItemType "directory" -force
          Invoke-WebRequest -Uri 'https://sollioazureimagebuilder.blob.core.windows.net/sollioazureimagebuilder/AccessDatabaseEngine.exe' -OutFile 'C:\temp\AccessDatabaseEngine.exe'
          $now = Get-Date -Format "MM/dd/yyyy HH:mm"
          Add-Content -Path $LogFile "[$now] Telechargement Database Engine Completer"
