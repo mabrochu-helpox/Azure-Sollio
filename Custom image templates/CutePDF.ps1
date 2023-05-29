@@ -22,7 +22,7 @@
 ## Configuration de l'image AVD ERPCOOP-SOLLIO.NET    ##
 ########################################################
 
-write-host "ited - Installation de CutePDF Writer "
+write-host "[ited] - Installation de CutePDF Writer en cours ..."
 New-Item -Path "C:\ited\GoldenImage\Log" -ItemType directory -force -ErrorAction SilentlyContinue
 $logpath = "C:\ited\GoldenImage\Log"
 $LogFile = "C:\ited\GoldenImage\Log\$env:computername.txt"
@@ -32,7 +32,6 @@ if (!(Test-Path $LogFile)) {
     New-Item -Path "C:\ited\GoldenImage\Log\$env:computername.txt" -ItemType file -force -ErrorAction SilentlyContinue
 
 }
-
 
 try{
     Add-Content -Path $LogFile "========================== Installation De CutePDF =========================="
@@ -50,7 +49,7 @@ try{
     Add-Content -Path $LogFile "[$now] Installation de CutePDF terminer"
     #Remove-Item "C:\temp" -Force -Recurse -Confirm:$false
     Add-Content -Path $LogFile "[$now] Nettoyage des sources de CutePDF terminer"
-    write-host "ited - Installation de CutePDF success"
+    write-host "[ited] - Installation de CutePDF success"
 
 }
 catch {
