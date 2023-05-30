@@ -53,3 +53,7 @@ Get-AppxPackage Microsoft.MixedReality.Portal | Remove-AppxPackage
 #Disable Paint3D
 Get-AppxPackage Microsoft.MSPaint | Remove-AppxPackage
 
+#Fix Mail In Fidelio
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe" "C:\Fidelio\CommsoftMail.dll" /codebase
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe" "C:\Fidelio\fanbox.dll" /codebase
+
